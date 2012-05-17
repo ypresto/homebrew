@@ -6,7 +6,7 @@ class Rbenv < Formula
   md5 '26e00faff3ba04fdeeeecb0bfbf96351'
 
   head 'https://github.com/sstephenson/rbenv.git'
-
+  platforms :mac, :linux
   def install
     prefix.install Dir['*']
   end
