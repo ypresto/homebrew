@@ -5,7 +5,7 @@ class Ceylon < Formula
   url 'http://ceylon-lang.org/download/dist/1_0_Milestone1'
   version '1.0.M1'
   md5 '627ebfc52fc9ba93fc63df59f8309509'
-
+  platforms :mac, :linux
   def install
     rm_f Dir["bin/*.bat"]
 
