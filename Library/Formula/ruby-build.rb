@@ -6,7 +6,7 @@ class RubyBuild < Formula
   md5 'a65e73dee5929ffe4366352a9240f0b6'
 
   head 'https://github.com/sstephenson/ruby-build.git'
-
+  platforms :mac, :linux 
   def install
     ENV['PREFIX'] = prefix
     system "./install.sh"
