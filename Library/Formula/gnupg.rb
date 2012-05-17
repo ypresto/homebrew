@@ -9,6 +9,7 @@ class Gnupg < Formula
   homepage 'http://www.gnupg.org/'
   url 'ftp://ftp.gnupg.org/gcrypt/gnupg/gnupg-1.4.12.tar.bz2'
   sha1 '9b78e20328d35525af7b8a9c1cf081396910e937'
+  platforms :mac, :linux
 
   def options
     [
