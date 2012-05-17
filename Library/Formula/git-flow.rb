@@ -16,7 +16,7 @@ class GitFlow < Formula
   version '0.4.1'
 
   head 'https://github.com/nvie/gitflow.git', :branch => 'develop'
-
+  platforms :mac, :linux
   def install
     system "make", "prefix=#{prefix}", "install"
 
