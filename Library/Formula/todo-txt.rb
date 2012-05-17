@@ -5,7 +5,7 @@ class TodoTxt < Formula
   homepage 'http://todotxt.com/'
   md5 '065b848d0c300dd024a4ece86a68c0fa'
   head 'https://github.com/ginatrapani/todo.txt-cli.git'
-
+  platforms :mac, :linux
   def install
     bin.install 'todo.sh'
     prefix.install 'todo.cfg' # Default config file
