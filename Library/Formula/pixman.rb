@@ -4,7 +4,7 @@ class Pixman < Formula
   homepage 'http://cairographics.org/'
   url 'http://cairographics.org/releases/pixman-0.24.4.tar.gz'
   sha1 'efaa09789128ebc42d17a11d2e350b7217a7cd05'
-
+  platforms :mac, :linux
   depends_on 'pkg-config' => :build
 
   def options
