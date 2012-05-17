@@ -17,6 +17,7 @@ class Sqlite < Formula
   url 'http://www.sqlite.org/sqlite-autoconf-3071000.tar.gz'
   sha1 '0442d5a1bff50153039951b09db649864d8af0bb'
   version '3.7.10'
+  platforms :mac, :linux
 
   depends_on 'readline' => :optional
 
@@ -51,8 +52,13 @@ class Sqlite < Formula
     if ARGV.include? "--with-functions"
       d=Pathname.getwd
       SqliteFunctions.new.brew { mv 'extension-functions.c?get=25', d + 'extension-functions.c' }
-      system ENV.cc, "-fno-common", "-dynamiclib", "extension-functions.c", "-o", "libsqlitefunctions.dylib", *ENV.cflags.split
-      lib.install "libsqlitefunctions.dylib"
+      if mac then
+        system ENV.cc, "-fno-common", "-dynamiclib", "extension-functions.c", "-o", "libsqlitefunctions.dylib", *ENV.cflags.split
+        lib.install "libsqlitefunctions.dylib"
+      elsif linux then
+        system ENV.cc, "-fno-common", "-shared", "extension-functions.c", "-o", "libsqlitefunctions.so", *ENV.cflags.split
+        lib.install "libsqlitefunctions.so"
+      end
     end
 
     SqliteDocs.new.brew { doc.install Dir['*'] } if ARGV.include? "--with-docs"

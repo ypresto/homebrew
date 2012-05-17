@@ -1,4 +1,5 @@
 def blacklisted? name
+  return # FIXME: Only for Linux
   case name.downcase
   when /^vim?$/, 'screen', /^rubygems?$/ then <<-EOS.undent
     Apple distributes #{name} with OS X, you can find it in /usr/bin.

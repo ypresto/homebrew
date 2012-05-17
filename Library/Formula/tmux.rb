@@ -4,12 +4,13 @@ class Tmux < Formula
   url 'http://sourceforge.net/projects/tmux/files/tmux/tmux-1.6/tmux-1.6.tar.gz'
   md5 '3e37db24aa596bf108a0442a81c845b3'
   homepage 'http://tmux.sourceforge.net'
+  platforms :mac, :linux
 
   head 'https://tmux.svn.sourceforge.net/svnroot/tmux/trunk'
 
   depends_on 'libevent'
 
-  if ARGV.build_head? and MacOS.xcode_version >= "4.3"
+  if mac and ARGV.build_head? and MacOS.xcode_version >= "4.3"
     depends_on "automake" => :build
     depends_on "libtool" => :build
   end

@@ -5,6 +5,7 @@ class Gdbm < Formula
   url 'http://ftpmirror.gnu.org/gdbm/gdbm-1.10.tar.gz'
   mirror 'http://ftp.gnu.org/gnu/gdbm/gdbm-1.10.tar.gz'
   md5 '88770493c2559dc80b561293e39d3570'
+  platforms :mac, :linux
 
   def install
     system "./configure", "--disable-dependency-tracking",

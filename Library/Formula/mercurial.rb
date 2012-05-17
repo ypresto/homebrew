@@ -4,10 +4,11 @@ class Mercurial < Formula
   homepage 'http://mercurial.selenic.com/'
   url 'http://mercurial.selenic.com/release/mercurial-2.1.1.tar.gz'
   sha1 'd6cc4b649b6705113732e62756788542897ba008'
+  platforms :mac, :linux
 
   head 'http://selenic.com/repo/hg', :using => :hg
 
-  depends_on 'docutils' => :python if ARGV.build_head? or ARGV.include? "--doc"
+  depends_on 'docutils' => :python if ARGV.build_head? or ARGV.include? "--doc" or linux
 
   def options
     [["--doc", "build the documentation. Depends on 'docutils' module."]]
