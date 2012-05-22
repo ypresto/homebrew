@@ -23,9 +23,12 @@ module HomebrewEnvExtension
     end
 
     if SystemCommand.platform == :linux
+      # XXX: fixed paths of compiler / linker,
+      #      which might be determined by configure script
       self['CC'] = '/usr/bin/gcc'
       self['CXX'] = '/usr/bin/g++'
       set_cflags "-O2 #{SAFE_CFLAGS_FLAGS}"
+      self['LD'] = '/usr/bin/ld'
     else
       # Os is the default Apple uses for all its stuff so let's trust them
       set_cflags "-Os #{SAFE_CFLAGS_FLAGS}"
@@ -45,7 +48,7 @@ module HomebrewEnvExtension
     # to use a specific linker. However doing this in general causes formula to
     # build more successfully because we are changing CC and many build systems
     # don't react properly to that.
-    self['LD'] = self['CC']
+    self['LD'] = self['CC'] unless SystemCommand.platform == :linux
   end
 
   def deparallelize
