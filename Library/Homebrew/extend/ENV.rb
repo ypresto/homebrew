@@ -23,9 +23,9 @@ module HomebrewEnvExtension
     end
 
     if SystemCommand.platform == :linux
-      self['CC'] = '/usr/bin/cc'
-      self['CXX'] = '/usr/bin/c++'
-      cflags = ['-O3']
+      self['CC'] = '/usr/bin/gcc'
+      self['CXX'] = '/usr/bin/g++'
+      set_cflags "-O2 #{SAFE_CFLAGS_FLAGS}"
     else
       # Os is the default Apple uses for all its stuff so let's trust them
       set_cflags "-Os #{SAFE_CFLAGS_FLAGS}"
