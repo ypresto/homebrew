@@ -1,5 +1,7 @@
 require 'formula'
 
+# imported (copied) from python.rb
+
 # Was a Framework build requested?
 def build_framework?; ARGV.include? '--framework'; end
 
