@@ -4,6 +4,7 @@ class Zsh < Formula
   homepage 'http://www.zsh.org/'
   url 'http://sourceforge.net/projects/zsh/files/zsh-dev/4.3.17/zsh-4.3.17.tar.gz'
   md5 '9074077945550d6684ebe18b3b167d52'
+  platforms :mac, :linux
 
   depends_on 'gdbm'
   depends_on 'pcre'

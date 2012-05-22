@@ -3,17 +3,20 @@ require 'formula'
 class GitManuals < Formula
   url 'http://git-core.googlecode.com/files/git-manpages-1.7.9.3.tar.gz'
   sha1 '223daa871a64facc60bdf643c50c78eac21c88f4'
+  platforms :mac, :linux
 end
 
 class GitHtmldocs < Formula
   url 'http://git-core.googlecode.com/files/git-htmldocs-1.7.9.3.tar.gz'
   sha1 '2d488c3975da1c2ea90965b82233a986c498a8c2'
+  platforms :mac, :linux
 end
 
 class Git < Formula
   homepage 'http://git-scm.com'
   url 'http://git-core.googlecode.com/files/git-1.7.9.3.tar.gz'
   sha1 '6216153da1139c25cb96cfb4441eff327013ec4f'
+  platforms :mac, :linux
 
   depends_on 'pcre' if ARGV.include? '--with-pcre'
 
