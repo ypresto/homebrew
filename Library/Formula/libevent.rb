@@ -8,10 +8,14 @@ class Libevent < Formula
   head 'git://levent.git.sourceforge.net/gitroot/levent/levent'
 
   fails_with_llvm "Undefined symbol '_current_base' reported during linking.", :build => 2326
+  platforms :mac, :linux
 
-  if ARGV.build_head? and MacOS.xcode_version >= "4.3"
+  if (mac and ARGV.build_head? and MacOS.xcode_version >= "4.3")
     depends_on "automake" => :build
     depends_on "libtool" => :build
+  elsif linux
+    depends_on "automake" => :build unless which('automake')
+    depends_on "libtool" => :build unless which('libtool')
   end
 
   def install
