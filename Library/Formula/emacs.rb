@@ -5,6 +5,7 @@ class Emacs < Formula
   url 'http://ftpmirror.gnu.org/emacs/emacs-23.4.tar.bz2'
   mirror 'http://ftp.gnu.org/pub/gnu/emacs/emacs-23.4.tar.bz2'
   md5 '070c68ad8e3c31fb3cb2414feaf5e6f0'
+  platforms :mac, :linux
 
   fails_with_llvm "Duplicate symbol errors while linking.", :build => 2334
 
@@ -20,6 +21,7 @@ class Emacs < Formula
 
   def options
     [
+      # FIXME: bad options on linux
       ["--cocoa", "Build a Cocoa version of emacs"],
       ["--srgb", "Enable sRGB colors in the Cocoa version of emacs"],
       ["--with-x", "Include X11 support"],
