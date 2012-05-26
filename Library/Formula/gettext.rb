@@ -5,6 +5,7 @@ class Gettext < Formula
   url 'http://ftpmirror.gnu.org/gettext/gettext-0.18.1.1.tar.gz'
   mirror 'http://ftp.gnu.org/gnu/gettext/gettext-0.18.1.1.tar.gz'
   md5 '3dd55b952826d2b32f51308f2f91aa89'
+  platforms :mac, :linux
 
   keg_only "OS X provides the BSD gettext library and some software gets confused if both are in the library path."
 

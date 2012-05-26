@@ -5,7 +5,7 @@ class Rpg < Formula
   head 'https://github.com/rtomayko/rpg.git'
   homepage 'https://github.com/rtomayko/rpg'
   md5 '5e03c55e24ba697bc5bb92ec4c69750c'
-
+  platforms :mac, :linux
   def install
     system "./configure", "--prefix=#{prefix}"
     system "make"

@@ -4,6 +4,7 @@ class Tig < Formula
   homepage 'http://jonas.nitro.dk/tig/'
   url 'http://jonas.nitro.dk/tig/releases/tig-0.18.tar.gz'
   md5 '4fa9e33c5daa76b6fed11e068405356f'
+  platform :mac, :linux
 
   def install
     system "./configure", "--prefix=#{prefix}", "--sysconfdir=#{etc}"

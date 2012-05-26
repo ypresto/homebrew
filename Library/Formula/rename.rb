@@ -5,7 +5,7 @@ class Rename < Formula
   version '0.1.3'
   homepage 'http://plasmasturm.org/code/rename'
   md5 'ce931227630a44d5d4ca4234a1fb8e63'
-
+  platforms :mac, :linux
   def install
     system 'pod2man', 'rename', 'rename.1'
     bin.install 'rename'

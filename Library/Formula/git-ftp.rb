@@ -6,6 +6,7 @@ class GitFtp < Formula
   md5 'a4e3cd6d2dd008c0f49b5292efa7be42'
 
   head 'https://github.com/resmo/git-ftp.git'
+  platforms :mac, :linux
 
   def install
     system "make", "prefix=#{prefix}", "install"

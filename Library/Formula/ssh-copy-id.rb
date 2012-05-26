@@ -5,7 +5,7 @@ class SshCopyId < Formula
   version '5.9p1'
   homepage 'http://openssh.org/'
   sha1 'ac4e0055421e9543f0af5da607a72cf5922dcc56'
-
+  platforms :mac, :linux
   def install
     bin.install 'contrib/ssh-copy-id'
     man1.install 'contrib/ssh-copy-id.1'

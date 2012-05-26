@@ -10,6 +10,7 @@ class CoffeeScript < Formula
   # since there isn't a way to specify that just remove
   # the depends_on
   depends_on 'node' unless ARGV.build_head?
+  platforms :mac, :linux
 
   def install
     bin.mkpath
