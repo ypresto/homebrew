@@ -7,7 +7,7 @@ class Tmux < Formula
   platforms :mac, :linux
 
   head 'https://tmux.svn.sourceforge.net/svnroot/tmux/trunk'
-
+  platforms :mac, :linux
   depends_on 'libevent'
 
   if mac and ARGV.build_head? and MacOS.xcode_version >= "4.3"

@@ -4,6 +4,7 @@ class Agrep < Formula
   homepage 'http://en.wikipedia.org/wiki/Agrep'
   url 'ftp://ftp.cs.arizona.edu/agrep/agrep-2.04.tar.Z'
   md5 'abc645404d3926a57c3f5e86a6e89ee9'
+  platforms :mac, :linux
 
   def install
     system "make", "CFLAGS=#{ENV.cflags}"

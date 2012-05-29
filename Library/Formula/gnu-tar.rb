@@ -5,6 +5,7 @@ class GnuTar < Formula
   mirror 'http://ftp.gnu.org/gnu/tar/tar-1.26.tar.gz'
   homepage 'http://www.gnu.org/software/tar/'
   md5 '00d1e769c6af702c542cca54b728920d'
+  platforms :mac, :linux
 
   def options
     [['--default-names', "Do NOT prepend 'g' to the binary; will override system tar."]]

@@ -6,7 +6,7 @@ class Sshuttle < Formula
   md5 '000af679bca06e7ee40985a014858b06'
 
   head 'https://github.com/apenwarr/sshuttle.git'
-
+  platforms :mac, :linux
   def install
     libexec.install Dir['*']
     (bin+'sshuttle').write <<-EOS.undent

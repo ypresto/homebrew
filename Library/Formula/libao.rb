@@ -6,7 +6,7 @@ class Libao < Formula
   homepage 'http://www.xiph.org/ao/'
 
   depends_on 'pkg-config' => :build
-
+  platforms :mac, :linux
   def install
     system "./configure", "--disable-dependency-tracking",
                           "--prefix=#{prefix}",
