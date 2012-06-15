@@ -9,9 +9,13 @@ class PkgConfig < Formula
   url 'http://pkg-config.freedesktop.org/releases/pkg-config-0.25.tar.gz'
   md5 'a3270bab3f4b69b7dc6dbdacbcae9745'
 
+  platforms :mac, :linux
+
+  @_mac = mac
+
   def install
     # fixes compile error on Lion with Clang duplicate symbols in libglib
-    ENV.append_to_cflags '-std=gnu89' if ENV.compiler == :clang
+    ENV.append_to_cflags '-std=gnu89' if @_mac and ENV.compiler == :clang
 
     paths = %W[
         #{HOMEBREW_PREFIX}/lib/pkgconfig
