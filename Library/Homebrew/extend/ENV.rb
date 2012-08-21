@@ -25,6 +25,7 @@ module HomebrewEnvExtension
     if SystemCommand.platform == :linux
       self['CC'] = '/usr/bin/cc'
       self['CXX'] = '/usr/bin/c++'
+      self['LD'] = '/usr/bin/ld'
       cflags = ['-O3']
     else
       # Os is the default Apple uses for all its stuff so let's trust them
@@ -45,7 +46,7 @@ module HomebrewEnvExtension
     # to use a specific linker. However doing this in general causes formula to
     # build more successfully because we are changing CC and many build systems
     # don't react properly to that.
-    self['LD'] = self['CC']
+    self['LD'] ||= self['CC']
   end
 
   def deparallelize
