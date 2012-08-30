@@ -4,6 +4,7 @@ class Node < Formula
   homepage 'http://nodejs.org/'
   url 'http://nodejs.org/dist/v0.6.12/node-v0.6.12.tar.gz'
   md5 'a12766ae4003c9712927d1fa134ed9f6'
+  platforms :mac, :linux
 
   head 'https://github.com/joyent/node.git'
 
@@ -13,7 +14,10 @@ class Node < Formula
   end
 
   # Leopard OpenSSL is not new enough, so use our keg-only one
-  depends_on 'openssl' if MacOS.leopard?
+  depends_on 'openssl' if mac and MacOS.leopard?
+
+  depends_on 'gdbm' if linux
+
 
   fails_with_llvm :build => 2326
 
