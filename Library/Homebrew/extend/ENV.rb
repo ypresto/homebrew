@@ -48,7 +48,7 @@ module HomebrewEnvExtension
     # to use a specific linker. However doing this in general causes formula to
     # build more successfully because we are changing CC and many build systems
     # don't react properly to that.
-    self['LD'] = self['CC'] unless SystemCommand.platform == :linux
+    self['LD'] ||= self['CC']
   end
 
   def deparallelize
