@@ -25,5 +25,8 @@ class Ncurses < Formula
                           "--enable-symlinks"
     system "make"
     system "make install"
+    %w{
+      curses.h eti.h form.h menu.h ncurses.h panel.h term.h unctrl.h
+    }.each { |h| ln_s "./ncurses/#{h}", "#{include}/#{h}" }
   end
 end
