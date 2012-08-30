@@ -24,6 +24,7 @@ class Vim < Formula
                           "--with-tlib=ncurses",
                           "--enable-pythoninterp",
                           "--enable-rubyinterp",
+                          "--enable-perlinterp",
                           "--enable-cscope",
                           "--with-ruby-command=/usr/bin/ruby",
                           "--with-features=huge"
