@@ -1,26 +1,32 @@
 require 'formula'
 
+# imported (copied) from python.rb
+
 # Was a Framework build requested?
 def build_framework?; ARGV.include? '--framework'; end
 
 # Are we installed or installing as a Framework?
 def as_framework?
-  (self.installed? and File.exists? prefix+"Frameworks/Python.framework") or build_framework?
+  @__mac and((self.installed? and File.exists? prefix+"Frameworks/Python.framework") or build_framework?)
 end
 
 class Distribute < Formula
   url 'http://pypi.python.org/packages/source/d/distribute/distribute-0.6.24.tar.gz'
   md5 '17722b22141aba8235787f79800cc452'
+  platforms :linux
 end
 
-class Python < Formula
+class Python27 < Formula
   homepage 'http://www.python.org/'
   url 'http://www.python.org/ftp/python/2.7.2/Python-2.7.2.tar.bz2'
   md5 'ba7b2f11ffdbf195ee0d111b9455a5bd'
+  platforms :linux
 
   depends_on 'readline' => :optional # Prefer over OS X's libedit
-  depends_on 'sqlite'   => :optional # Prefer over OS X's older version
+  depends_on 'sqlite'   => :optional
   depends_on 'gdbm'     => :optional
+
+  @__mac = mac
 
   def options
     [
@@ -40,11 +46,16 @@ class Python < Formula
   skip_clean ['bin', 'lib']
 
   def install
+    if build_framework? and not @__mac
+      onoe "Cannot install framework on !mac"
+      exit 99
+    end
+
     # Python requires -fwrapv for proper Decimal division with Clang. See:
     # https://github.com/mxcl/homebrew/pull/10487
     # http://stackoverflow.com/questions/7590137/dividing-decimals-yields-invalid-results-in-python-2-5-to-2-7
     # https://trac.macports.org/changeset/87442
-    ENV.append_to_cflags "-fwrapv"
+    ENV.append_to_cflags "-fwrapv" if @__mac
 
     if build_framework? and ARGV.include? "--static"
       onoe "Cannot specify both framework and static."
@@ -71,7 +82,7 @@ class Python < Formula
 
     # HAVE_POLL is "broken" on OS X
     # See: http://trac.macports.org/ticket/18376
-    inreplace 'pyconfig.h', /.*?(HAVE_POLL[_A-Z]*).*/, '#undef \1'
+    inreplace 'pyconfig.h', /.*?(HAVE_POLL[_A-Z]*).*/, '#undef \1' if @__mac
 
     system "make"
     ENV.j1 # Installs must be serialized
@@ -108,7 +119,8 @@ class Python < Formula
     # $ easy_install pip
     # $ pip install --upgrade distribute
     # to get newer versions of distribute outside of Homebrew.
-    Distribute.new.brew { system "#{bin}/python", "setup.py", "install" }
+    Distribute.new.brew { system "#{bin}/python", "setup.py", "install" } if @__mac
+    Distribute.new.brew { system "env", "LD_LIBRARY_PATH=#{lib}", "#{bin}/python", "setup.py", "install" } unless @__mac
   end
 
   def caveats
