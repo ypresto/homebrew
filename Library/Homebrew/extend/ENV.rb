@@ -23,12 +23,12 @@ module HomebrewEnvExtension
     end
 
     if SystemCommand.platform == :linux
-      # XXX: fixed paths of compiler / linker,
-      #      which might be determined by configure script
-      self['CC'] = '/usr/bin/gcc'
-      self['CXX'] = '/usr/bin/g++'
+      # XXX: use PATH instead of fixed /usr/bin/*
+      #      it might be better to be determined by configure script
+      self['CC'] = 'gcc'
+      self['CXX'] = 'g++'
       set_cflags "-O2 #{SAFE_CFLAGS_FLAGS}"
-      self['LD'] = '/usr/bin/ld'
+      self['LD'] = 'ld'
     else
       # Os is the default Apple uses for all its stuff so let's trust them
       set_cflags "-Os #{SAFE_CFLAGS_FLAGS}"
