@@ -4,10 +4,13 @@ class Libxslt < Formula
   url 'ftp://xmlsoft.org/libxml2/libxslt-1.1.26.tar.gz'
   homepage 'http://xmlsoft.org/XSLT/'
   md5 'e61d0364a30146aaa3001296f853b2b9'
+  platforms :mac, :linux
 
-  keg_only :provided_by_osx
+  keg_only :provided_by_osx if mac
 
   depends_on 'libxml2'
+
+  @_mac = mac
 
   def install
     system "./configure", "--prefix=#{prefix}",
@@ -16,6 +19,7 @@ class Libxslt < Formula
     system "make"
     system "make install"
   end
+
 
   def caveats; <<-EOS.undent
     To allow the nokogiri gem to link against this libxslt, run

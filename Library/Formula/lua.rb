@@ -4,12 +4,17 @@ class Lua < Formula
   homepage 'http://www.lua.org/'
   url 'http://www.lua.org/ftp/lua-5.1.4.tar.gz'
   md5 'd0870f2de55d59c1c8419f36e8fac150'
+  platforms :mac, :linux
+
+  depends_on 'readline' if linux
 
   fails_with_llvm "Lua itself compiles with LLVM, but may fail when other software tries to link.",
                   :build => 2326
 
   # Skip cleaning both empty folders and bin/libs so external symbols still work.
   skip_clean :all
+
+  @_mac = mac
 
   def options
     [['--completion', 'Enables advanced readline support']]
@@ -18,7 +23,7 @@ class Lua < Formula
   # Be sure to build a dylib, or else runtime modules will pull in another static copy of liblua = crashy
   # See: https://github.com/mxcl/homebrew/pull/5043
   def patches
-    p = [DATA]
+    p = [DATA] if @_mac
     # completion provided by advanced readline power patch from
     # http://lua-users.org/wiki/LuaPowerPatches
     if ARGV.include? '--completion'
@@ -52,8 +57,9 @@ class Lua < Formula
     # below that, thus making luarocks work
     (HOMEBREW_PREFIX/"lib/lua"/version.split('.')[0..1].join('.')).mkpath
 
-    system "make", "macosx", "INSTALL_TOP=#{prefix}", "INSTALL_MAN=#{man1}"
-    system "make", "install", "INSTALL_TOP=#{prefix}", "INSTALL_MAN=#{man1}"
+    platform_name = @_mac ? "macosx" : "linux"
+    system "make", platform_name, "INSTALL_TOP=#{prefix}", "INSTALL_MAN=#{man1}", "MYLDFLAGS=#{ENV.ldflags}"
+    system "make", "install",     "INSTALL_TOP=#{prefix}", "INSTALL_MAN=#{man1}", "MYLDFLAGS=#{ENV.ldflags}"
 
     (lib+"pkgconfig").install 'etc/lua.pc'
   end

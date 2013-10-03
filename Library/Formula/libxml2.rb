@@ -4,6 +4,7 @@ class Libxml2 < Formula
   url 'ftp://xmlsoft.org/libxml2/libxml2-2.7.8.tar.gz'
   homepage 'http://xmlsoft.org'
   md5 '8127a65e8c3b08856093099b52599c86'
+  platforms :mac, :linux
 
   keg_only :provided_by_osx
 

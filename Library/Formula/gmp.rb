@@ -5,6 +5,9 @@ class Gmp < Formula
   url 'http://ftpmirror.gnu.org/gmp/gmp-5.0.4.tar.bz2'
   mirror 'http://ftp.gnu.org/gnu/gmp/gmp-5.0.4.tar.bz2'
   sha1 'ea4ea7c3f10436ef5ae7a75b3fad163a8b86edc0'
+  platforms :mac, :linux
+
+  @_mac = mac
 
   def options
     [
@@ -14,24 +17,28 @@ class Gmp < Formula
   end
 
   def install
-    # Reports of problems using gcc 4.0 on Leopard
-    # https://github.com/mxcl/homebrew/issues/issue/2302
-    # Also force use of 4.2 on 10.6 in case a user has changed the default
-    # Do not force if xcode > 4.2 since it does not have /usr/bin/gcc-4.2 as default
-    unless MacOS.xcode_version >= "4.2"
-      ENV.gcc_4_2
+    if @_mac
+      # Reports of problems using gcc 4.0 on Leopard
+      # https://github.com/mxcl/homebrew/issues/issue/2302
+      # Also force use of 4.2 on 10.6 in case a user has changed the default
+      # Do not force if xcode > 4.2 since it does not have /usr/bin/gcc-4.2 as default
+      unless MacOS.xcode_version >= "4.2"
+        ENV.gcc_4_2
+      end
     end
 
     args = ["--prefix=#{prefix}", "--enable-cxx"]
 
-    # Build 32-bit where appropriate, and help configure find 64-bit CPUs
-    # see: http://gmplib.org/macos.html
-    if MacOS.prefer_64_bit? and not ARGV.build_32_bit?
-      ENV.m64
-      args << "--build=x86_64-apple-darwin"
-    else
-      ENV.m32
-      args << "--build=none-apple-darwin"
+    if @_mac
+      # Build 32-bit where appropriate, and help configure find 64-bit CPUs
+      # see: http://gmplib.org/macos.html
+      if MacOS.prefer_64_bit? and not ARGV.build_32_bit?
+        ENV.m64
+        args << "--build=x86_64-apple-darwin"
+      else
+        ENV.m32
+        args << "--build=none-apple-darwin"
+      end
     end
 
     system "./configure", *args

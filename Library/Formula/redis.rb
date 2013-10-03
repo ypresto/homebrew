@@ -4,6 +4,7 @@ class Redis < Formula
   homepage 'http://redis.io/'
   url 'http://redis.googlecode.com/files/redis-2.4.8.tar.gz'
   md5 'ac776d25f238b142d3d526cfcdc621ab'
+  platforms :mac, :linux
 
   head 'https://github.com/antirez/redis.git', :branch => 'unstable'
 

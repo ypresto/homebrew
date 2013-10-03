@@ -4,7 +4,7 @@ class Hub < Formula
   url 'https://github.com/defunkt/hub/tarball/v1.10.2'
   homepage 'http://defunkt.io/hub/'
   head 'https://github.com/defunkt/hub.git'
-  md5 '12357b7542d1caf4ec049343e8564057'
+  md5 'aa7a92bb5ea3aeb47bef5e280db6fb87'
   platforms :mac, :linux
 
   @_mac = mac

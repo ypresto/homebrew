@@ -4,6 +4,7 @@ class Qt < Formula
   homepage 'http://qt.nokia.com/'
   url 'http://get.qt.nokia.com/qt/source/qt-everywhere-opensource-src-4.8.0.tar.gz'
   md5 'e8a5fdbeba2927c948d9f477a6abe904'
+  platforms :mac, :linux
 
   bottle do
     url 'https://downloads.sf.net/project/machomebrew/Bottles/qt-4.8.0-bottle.tar.gz'
@@ -23,7 +24,9 @@ class Qt < Formula
   end
 
   depends_on "d-bus" if ARGV.include? '--with-qtdbus'
-  depends_on 'sqlite' if MacOS.leopard?
+  depends_on 'sqlite' if MacOS.leopard? or (linux and !which('sqlite3'))
+
+  @_mac = mac
 
   # Fix compilation with llvm-gcc. Remove for 4.8.1.
   def patches
